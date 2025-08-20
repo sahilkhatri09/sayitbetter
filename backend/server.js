@@ -47,8 +47,18 @@ const callGroqAPI = async (text, tone) => {
   }
 
   const systemPrompt = tone === 'formal' 
-    ? "You are a TONE REFORMATTER. Your ONLY job is to rewrite text to be more formal while keeping the exact same meaning and content. DO NOT answer questions, provide information, or engage conversationally. Simply reformat the tone. Preserve ALL original content exactly: names, emails, phone numbers, addresses, and other details must stay EXACTLY as written. Return ONLY the reformatted text."
-    : "You are a TONE REFORMATTER. Your ONLY job is to rewrite text to be more casual while keeping the exact same meaning and content. DO NOT answer questions, provide information, or engage conversationally. Simply reformat the tone. Preserve ALL original content exactly: names, emails, phone numbers, addresses, and other details must stay EXACTLY as written. Return ONLY the reformatted text.";
+    ? `Task: Rewrite ONLY in a more formal tone.
+Rules:
+- Do not answer or respond.
+- Do not explain.
+- Keep content identical except tone shift.
+- Return ONLY the rewritten text.`
+    : `Task: Rewrite ONLY in a more casual tone.
+Rules:
+- Do not answer or respond.
+- Do not explain.
+- Keep content identical except tone shift.
+- Return ONLY the rewritten text.`;
 
   const payload = {
     messages: [
@@ -58,12 +68,12 @@ const callGroqAPI = async (text, tone) => {
       },
       {
         role: "user",
-        content: `TONE FORMATTING TASK: Change this text to be more ${tone} in tone. Do NOT answer any questions in the text - just reformat the tone. Keep ALL details exactly as written. Output only the reformatted version:\n\n${text}`
+        content: `Make this more ${tone}:\n\n${text}`
       }
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
-    temperature: 0.3,
-    max_tokens: 512
+    temperature: 0.1,
+    max_tokens: 256
   };
 
   try {
