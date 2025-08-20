@@ -36,24 +36,7 @@ app.use(express.json({ limit: '10mb' }));
 // Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// PII Redaction Middleware
-const redactPII = (text) => {
-  if (!text || typeof text !== 'string') return text;
-  
-  // Email redaction pattern
-  const emailPattern = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
-  // Phone number patterns (various formats)
-  const phonePattern = /(\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})/g;
-  // SSN pattern
-  const ssnPattern = /\b\d{3}-\d{2}-\d{4}\b/g;
-  
-  let redactedText = text
-    .replace(emailPattern, '[EMAIL_REDACTED]')
-    .replace(phonePattern, '[PHONE_REDACTED]')
-    .replace(ssnPattern, '[SSN_REDACTED]');
-    
-  return redactedText;
-};
+// No PII redaction - users have full control over their text
 
 // Groq API integration
 const callGroqAPI = async (text, tone) => {
@@ -130,9 +113,6 @@ app.post('/api/format', async (req, res) => {
       });
     }
 
-    // Redact PII before sending to API
-    const redactedText = redactPII(text);
-    
     // Increment global project usage
     projectStats.totalCalls++;
     saveStats();
@@ -140,8 +120,8 @@ app.post('/api/format', async (req, res) => {
     // Log request without body for privacy
     console.log(`[${new Date().toISOString()}] Format request #${projectStats.totalCalls} - tone: ${tone}, text length: ${text.length}`);
 
-    // Call Groq API
-    const formattedText = await callGroqAPI(redactedText, tone);
+    // Call Groq API with original text
+    const formattedText = await callGroqAPI(text, tone);
 
     // Send response without logging the actual content
     res.json({ formattedText });

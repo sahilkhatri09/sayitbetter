@@ -7,7 +7,7 @@ A simple, privacy-focused web application that transforms your text between form
 ## ✨ Features
 
 - **🎯 Dual Tone Conversion**: Transform text to either formal or casual tone
-- **🔒 Privacy-First**: PII redaction before API calls, no data logging
+- **🔒 Privacy-First**: No data logging, users have full control over their text
 - **⚡ Fast & Lightweight**: Vanilla JavaScript frontend, no heavy frameworks
 - **📱 Responsive Design**: Works seamlessly on desktop and mobile
 - **🚀 Production Ready**: Configured for easy deployment on Render
@@ -110,7 +110,7 @@ Visit `http://localhost:3000` to use the application.
 
 - Maximum text length: 10,000 characters
 - Request timeout: 30 seconds
-- PII redaction: Automatic for emails, phone numbers, SSNs
+- Original text preserved: No modifications or redactions applied
 
 ## 📖 Usage
 
@@ -148,7 +148,7 @@ Response:
 ## 🔒 Privacy & Security
 
 - **No Data Storage**: Text is never stored on servers
-- **PII Redaction**: Emails, phone numbers, and SSNs are automatically redacted before API calls
+- **Original Text Preserved**: Your text is sent as-is to the AI service without any modifications
 - **No Request Logging**: Request/response bodies are never logged
 - **Secure Headers**: CORS and security headers properly configured
 - **Client-Side Auto-Save**: Text saved locally for crash recovery only
@@ -201,7 +201,7 @@ Edit the `callGroqAPI` function in `backend/server.js` to:
 - [ ] Casual tone conversion
 - [ ] Error handling (network issues, long text)
 - [ ] Mobile responsiveness
-- [ ] PII redaction functionality
+- [ ] Text preservation (no unwanted modifications)
 - [ ] Auto-save and recovery
 
 ### API Testing
