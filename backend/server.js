@@ -47,16 +47,18 @@ const callGroqAPI = async (text, tone) => {
   }
 
   const systemPrompt = tone === 'formal' 
-    ? `Convert to formal tone. Examples:
+    ? `Convert to formal tone. Always provide a conversion, never say "no conversion needed". Examples:
 "what is my name?" → "What is my name?"
 "how are you?" → "How are you?"
 "can you help me?" → "Could you please assist me?"
-Only output the converted text, nothing else.`
-    : `Convert to casual tone. Examples:
+"thanks" → "Thank you"
+Always output the converted text, never explanations.`
+    : `Convert to casual tone. Always provide a conversion, never say "no conversion needed". Examples:
 "What is my name?" → "what's my name?"
 "How are you?" → "how are ya?"
 "Could you please assist me?" → "can you help me?"
-Only output the converted text, nothing else.`;
+"Thank you" → "thanks"
+Always output the converted text, never explanations.`;
 
   const payload = {
     messages: [
@@ -71,7 +73,7 @@ Only output the converted text, nothing else.`;
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
     temperature: 0.2,
-    max_tokens: 100
+    max_tokens: 1000
   };
 
   try {
