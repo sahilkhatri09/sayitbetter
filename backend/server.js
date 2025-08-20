@@ -77,7 +77,7 @@ Always output the converted text, never explanations.`;
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
     temperature: 0.2,
-    max_tokens: 1000
+    max_tokens: 1.2*text.length
   };
 
   try {
