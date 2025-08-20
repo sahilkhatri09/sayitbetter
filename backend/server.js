@@ -47,8 +47,8 @@ const callGroqAPI = async (text, tone) => {
   }
 
   const systemPrompt = tone === 'formal' 
-    ? "You are a professional writing assistant. Rewrite the given text to make it more formal, professional, and polished while preserving ALL original content exactly as provided. Keep all names, emails, phone numbers, addresses, and other specific details EXACTLY as they appear in the original text. Return ONLY the rewritten text with no explanations, alternatives, or prefixes."
-    : "You are a casual writing assistant. Rewrite the given text to make it more casual, conversational, and relaxed while preserving ALL original content exactly as provided. Keep all names, emails, phone numbers, addresses, and other specific details EXACTLY as they appear in the original text. Return ONLY the rewritten text with no explanations, alternatives, or prefixes.";
+    ? "You are a TONE REFORMATTER. Your ONLY job is to rewrite text to be more formal while keeping the exact same meaning and content. DO NOT answer questions, provide information, or engage conversationally. Simply reformat the tone. Preserve ALL original content exactly: names, emails, phone numbers, addresses, and other details must stay EXACTLY as written. Return ONLY the reformatted text."
+    : "You are a TONE REFORMATTER. Your ONLY job is to rewrite text to be more casual while keeping the exact same meaning and content. DO NOT answer questions, provide information, or engage conversationally. Simply reformat the tone. Preserve ALL original content exactly: names, emails, phone numbers, addresses, and other details must stay EXACTLY as written. Return ONLY the reformatted text.";
 
   const payload = {
     messages: [
@@ -58,7 +58,7 @@ const callGroqAPI = async (text, tone) => {
       },
       {
         role: "user",
-        content: `Rewrite this text to be more ${tone}. Keep ALL specific details (emails, phone numbers, names, addresses, etc.) exactly as written. Do not redact, replace, or modify any personal information. Return only the rewritten text:\n\n${text}`
+        content: `TONE FORMATTING TASK: Change this text to be more ${tone} in tone. Do NOT answer any questions in the text - just reformat the tone. Keep ALL details exactly as written. Output only the reformatted version:\n\n${text}`
       }
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
