@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: tone-formatter
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GROQ_API_KEY
+        sync: false  # This needs to be set manually in Render dashboard

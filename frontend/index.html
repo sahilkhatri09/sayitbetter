@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tone Formatter - Make Your Writing Better</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Tone Formatter</h1>
+            <p class="subtitle">Transform your text between formal and casual tones</p>
+        </header>
+
+        <main class="main">
+            <div class="editor-section">
+                <div class="controls">
+                    <button id="formalBtn" class="btn btn-formal" disabled>
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Make More Formal
+                    </button>
+                    
+                    <button id="casualBtn" class="btn btn-casual" disabled>
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 14C20 12.9 19.1 12 18 12H15L14 9H15C16.1 9 17 8.1 17 7S16.1 5 15 5H9C7.9 5 7 5.9 7 7S7.9 9 9 9H10L11 12H9C7.9 12 7 12.9 7 14S7.9 16 9 16H18C19.1 16 20 15.1 20 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 20L12 18L10 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Make More Casual
+                    </button>
+                </div>
+
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="textInput" 
+                        class="textarea" 
+                        placeholder="Paste your text here and choose a tone to transform it..."
+                        maxlength="10000"
+                    ></textarea>
+                    <div class="textarea-footer">
+                        <span class="char-count">
+                            <span id="charCount">0</span> / 10,000 characters
+                        </span>
+                        <button id="clearBtn" class="btn-clear" title="Clear text">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p class="loading-text">Transforming your text...</p>
+            </div>
+        </div>
+
+        <div id="errorModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Error</h3>
+                    <button id="closeErrorModal" class="btn-close">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage">Something went wrong. Please try again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="retryBtn" class="btn btn-primary">Try Again</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="usageSection" class="usage-section">
+            <div class="usage-badge">
+                <svg class="usage-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3V21L12 17L21 21V3H3Z" fill="currentColor"/>
+                </svg>
+                <span id="usageCount" class="usage-number">-</span>
+                <span class="usage-label">transformations</span>
+                <div class="usage-trend">📈</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p class="footer-text">
+                Built with 
+                <a href="https://groq.com/" target="_blank" rel="noopener noreferrer">Groq AI</a>
+                • Privacy-focused • No data stored
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
