@@ -47,18 +47,16 @@ const callGroqAPI = async (text, tone) => {
   }
 
   const systemPrompt = tone === 'formal' 
-    ? `Task: Rewrite ONLY in a more formal tone.
-Rules:
-- Do not answer or respond.
-- Do not explain.
-- Keep content identical except tone shift.
-- Return ONLY the rewritten text.`
-    : `Task: Rewrite ONLY in a more casual tone.
-Rules:
-- Do not answer or respond.
-- Do not explain.
-- Keep content identical except tone shift.
-- Return ONLY the rewritten text.`;
+    ? `Convert to formal tone. Examples:
+"what is my name?" → "What is my name?"
+"how are you?" → "How are you?"
+"can you help me?" → "Could you please assist me?"
+Only output the converted text, nothing else.`
+    : `Convert to casual tone. Examples:
+"What is my name?" → "what's my name?"
+"How are you?" → "how are ya?"
+"Could you please assist me?" → "can you help me?"
+Only output the converted text, nothing else.`;
 
   const payload = {
     messages: [
@@ -68,12 +66,12 @@ Rules:
       },
       {
         role: "user",
-        content: `Make this more ${tone}:\n\n${text}`
+        content: text
       }
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
-    temperature: 0.1,
-    max_tokens: 256
+    temperature: 0.2,
+    max_tokens: 100
   };
 
   try {
