@@ -51,13 +51,17 @@ const callGroqAPI = async (text, tone) => {
 "what is my name?" → "What is my name?"
 "how are you?" → "How are you?"
 "can you help me?" → "Could you please assist me?"
+"tell me a joke" → "Could you please tell me a joke?"
 "thanks" → "Thank you"
+"give me the report" → "Could you please provide me with the report?"
 Always output the converted text, never explanations.`
     : `Convert to casual tone. Always provide a conversion, never say "no conversion needed". Examples:
 "What is my name?" → "what's my name?"
 "How are you?" → "how are ya?"
 "Could you please assist me?" → "can you help me?"
+"Could you please tell me a joke?" → "tell me a joke"
 "Thank you" → "thanks"
+"Could you please provide me with the report?" → "give me the report"
 Always output the converted text, never explanations.`;
 
   const payload = {
