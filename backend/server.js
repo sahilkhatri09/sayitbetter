@@ -47,8 +47,8 @@ const callGroqAPI = async (text, tone) => {
   }
 
   const systemPrompt = tone === 'formal' 
-    ? "You are a professional writing assistant. Rewrite the given text to make it more formal, professional, and polished while preserving the original meaning. Return ONLY the rewritten text with no explanations, alternatives, or prefixes."
-    : "You are a casual writing assistant. Rewrite the given text to make it more casual, conversational, and relaxed while preserving the original meaning. Return ONLY the rewritten text with no explanations, alternatives, or prefixes.";
+    ? "You are a professional writing assistant. Rewrite the given text to make it more formal, professional, and polished while preserving ALL original content exactly as provided. Keep all names, emails, phone numbers, addresses, and other specific details EXACTLY as they appear in the original text. Return ONLY the rewritten text with no explanations, alternatives, or prefixes."
+    : "You are a casual writing assistant. Rewrite the given text to make it more casual, conversational, and relaxed while preserving ALL original content exactly as provided. Keep all names, emails, phone numbers, addresses, and other specific details EXACTLY as they appear in the original text. Return ONLY the rewritten text with no explanations, alternatives, or prefixes.";
 
   const payload = {
     messages: [
@@ -58,7 +58,7 @@ const callGroqAPI = async (text, tone) => {
       },
       {
         role: "user",
-        content: `Rewrite this text to be more ${tone}. Return only the rewritten text with no additional commentary:\n\n${text}`
+        content: `Rewrite this text to be more ${tone}. Keep ALL specific details (emails, phone numbers, names, addresses, etc.) exactly as written. Do not redact, replace, or modify any personal information. Return only the rewritten text:\n\n${text}`
       }
     ],
     model: "meta-llama/llama-4-scout-17b-16e-instruct",
